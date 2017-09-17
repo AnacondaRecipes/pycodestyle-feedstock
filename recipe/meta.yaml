@@ -15,6 +15,7 @@ source:
   {{ hash_type }}: {{ hash_val }}
 
 build:
+  number: 1
   entry_points:
     - pycodestyle = pycodestyle:_main
 
