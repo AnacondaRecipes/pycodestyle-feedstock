@@ -35,7 +35,6 @@ test:
     - pycodestyle
   requires:
     - pip
-    - python <3.10
   commands:
     - pip check
     - pycodestyle --help
