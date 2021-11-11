@@ -28,13 +28,14 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python =2.7|>=3.5
+    - python >=3.6
 
 test:
   imports:
     - pycodestyle
   requires:
     - pip
+    - python <3.10
   commands:
     - pip check
     - pycodestyle --help
