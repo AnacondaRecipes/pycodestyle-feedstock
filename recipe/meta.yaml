@@ -48,7 +48,7 @@ about:
   description: |
     Pycodestyle is a tool to check your Python code against some of the style conventions in PEP 8.
   summary: Python style guide checker
-  doc_url: https://pycodestyle.readthedocs.io/
+  doc_url: https://pycodestyle.pycqa.org
   dev_url: https://github.com/PyCQA/pycodestyle
 
 extra:
