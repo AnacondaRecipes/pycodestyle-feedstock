@@ -16,7 +16,7 @@ source:
 build:
   entry_points:
     - pycodestyle = pycodestyle:_main
-  skip: True  # [py<37]
+  skip: True  # [py<36]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
