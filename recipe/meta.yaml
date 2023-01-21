@@ -1,7 +1,7 @@
 {% set name = "pycodestyle" %}
-{% set version = "2.8.0" %}
+{% set version = "2.10.0" %}
 {% set compress_type = "tar.gz" %}
-{% set hash_val = "eddd5847ef438ea1c7870ca7eb78a9d47ce0cdb4851a5523949f2601d0cbbe7f" %}
+{% set hash_val = "347187bdb476329d98f695c213d7295a846d1152ff4fe9bacb8a9590b8ee7053" %}
 {% set build_num = "0" %}
 
 package:
@@ -14,10 +14,9 @@ source:
   sha256: {{ hash_val }}
 
 build:
-  noarch: python
   entry_points:
     - pycodestyle = pycodestyle:_main
-
+  skip: True  # [py<36]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv
 
@@ -28,14 +27,13 @@ requirements:
     - setuptools
     - wheel
   run:
-    - python >=3.6
+    - python
 
 test:
   imports:
     - pycodestyle
   requires:
     - pip
-    - python <3.10
   commands:
     - pip check
     - pycodestyle --help
@@ -46,8 +44,10 @@ about:
   license: MIT
   license_file: LICENSE
   license_family: MIT
+  description: |
+    Pycodestyle is a tool to check your Python code against some of the style conventions in PEP 8.
   summary: Python style guide checker
-  doc_url: https://pycodestyle.readthedocs.io/
+  doc_url: https://pycodestyle.pycqa.org
   dev_url: https://github.com/PyCQA/pycodestyle
 
 extra:
