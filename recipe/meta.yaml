@@ -39,7 +39,7 @@ test:
     - pycodestyle --version
 
 about:
-  home: https://pycodestyle.readthedocs.io/
+  home: https://pycodestyle.pycqa.org
   license: MIT
   license_file: LICENSE
   license_family: MIT
