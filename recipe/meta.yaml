@@ -1,8 +1,7 @@
 {% set name = "pycodestyle" %}
-{% set version = "2.10.0" %}
+{% set version = "2.11.1" %}
 {% set compress_type = "tar.gz" %}
-{% set hash_val = "347187bdb476329d98f695c213d7295a846d1152ff4fe9bacb8a9590b8ee7053" %}
-{% set build_num = "0" %}
+{% set sha256 = "41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f" %}
 
 package:
   name: {{ name|lower }}
@@ -11,14 +10,14 @@ package:
 source:
   fn: {{ name }}-{{ version }}.{{ compress_type }}
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
-  sha256: {{ hash_val }}
+  sha256: {{ sha256 }}
 
 build:
   entry_points:
     - pycodestyle = pycodestyle:_main
   skip: True  # [py<36]
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
 
 requirements:
   host:
@@ -40,7 +39,7 @@ test:
     - pycodestyle --version
 
 about:
-  home: https://pycodestyle.readthedocs.io/
+  home: https://pycodestyle.pycqa.org
   license: MIT
   license_file: LICENSE
   license_family: MIT
