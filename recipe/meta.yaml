@@ -1,7 +1,7 @@
 {% set name = "pycodestyle" %}
-{% set version = "2.11.1" %}
+{% set version = "2.12.1" %}
 {% set compress_type = "tar.gz" %}
-{% set sha256 = "41ba0e7afc9752dfb53ced5489e89f8186be00e599e712660695b7a75ff2663f" %}
+{% set sha256 = "6838eae08bbce4f6accd5d5572075c63626a15ee3e6f842df996bf62f6d73521" %}
 
 package:
   name: {{ name|lower }}
@@ -15,7 +15,7 @@ source:
 build:
   entry_points:
     - pycodestyle = pycodestyle:_main
-  skip: True  # [py<36]
+  skip: True  # [py<38]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
 
@@ -34,6 +34,7 @@ test:
   requires:
     - pip
   commands:
+    # Unable to run pytest since the "testing" module is not distributed with the source.
     - pip check
     - pycodestyle --help
     - pycodestyle --version
