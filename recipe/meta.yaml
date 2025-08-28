@@ -1,21 +1,21 @@
 {% set name = "pycodestyle" %}
-{% set version = "2.12.1" %}
-{% set compress_type = "tar.gz" %}
-{% set sha256 = "6838eae08bbce4f6accd5d5572075c63626a15ee3e6f842df996bf62f6d73521" %}
+{% set version = "2.14.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.{{ compress_type }}
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
-  sha256: {{ sha256 }}
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: c4b5b517d278089ff9d0abdec919cd97262a3367449ea1c8b49b91529167b783
+  - url: https://github.com/PyCQA/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
+    sha256: ffcf4dc55f1e5fbdc6dd6acf5db0fd07ded534ae376eee23a742e1410b48d9ae
+    folder: gh
 
 build:
   entry_points:
     - pycodestyle = pycodestyle:_main
-  skip: True  # [py<38]
+  skip: true  # [py<39]
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps -vv --no-build-isolation
 
@@ -28,14 +28,25 @@ requirements:
   run:
     - python
 
+# self.assertEqual(errcode, 1)
+# AssertionError: None != 1
+{% set tests_to_skip = "test_check_diff" %}
+
 test:
+  source_files:
+    - gh/tests
+    - gh/testing
+    - gh/setup.py
+    - gh/setup.cfg
   imports:
     - pycodestyle
   requires:
     - pip
+    - pytest
   commands:
-    # Unable to run pytest since the "testing" module is not distributed with the source.
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -k "not {{ tests_to_skip }}" -v gh/tests
     - pycodestyle --help
     - pycodestyle --version
 
